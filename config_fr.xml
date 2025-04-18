@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<module>
+    <name>evo_statusflow</name>
+    <displayName><![CDATA[Gestion avanc&eacute;e de l&rsquo;&eacute;tat des commandes]]></displayName>
+    <version><![CDATA[1.0.0]]></version>
+    <description><![CDATA[G&eacute;rez les statuts des commandes et automatisez les transitions de statut avec des r&egrave;gles et des t&acirc;ches cron]]></description>
+    <author><![CDATA[Evolutive]]></author>
+    <tab><![CDATA[administration]]></tab>
+	<confirmUninstall><![CDATA[Êtes-vous sûr de vouloir désinstaller ? Cela supprimera toutes les règles de transition et les journaux.]]></confirmUninstall>
+    <is_configurable>1</is_configurable>
+    <need_instance>0</need_instance>
+</module>

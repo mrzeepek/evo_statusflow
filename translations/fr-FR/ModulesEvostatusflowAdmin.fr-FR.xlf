@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file original="admin-dev" source-language="fr-FR" target-language="fr-FR" datatype="plaintext">
+    <body>
+      <trans-unit id="05810b0a207b4aedb674f86c8962bfc6">
+        <source>Status Flow Rules</source>
+        <target>Règles de flux de statut</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="c889e9aaab476d3c7e15e25f15b9fa50">
+        <source>Add New Rule</source>
+        <target>Ajouter une nouvelle règle</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="0a4405bf4be3f74bf4e02b0b59496114">
+        <source>Edit Rule</source>
+        <target>Modifier la règle</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="5b887d3269f80f08657d763879b12959">
+        <source>Cannot delete rule: %error%</source>
+        <target>Cannot delete rule: %error%</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="b3ac8d81068d54e36266d974427259fa">
+        <source>Error occurred: %error%</source>
+        <target>Une erreur s’est produite: %error%</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="14c48d90a8d121da5b0703e51132b007">
+        <source>Status Flow Configuration</source>
+        <target>Status Flow Configuration</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="59538909b18471535b80edda56515856">
+        <source>Status flow command simulated successfully.</source>
+        <target>Commande de flux d’état simulée avec succès.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="562831e3a4d2fbc014fc9aa77ddaa3f8">
+        <source>Status flow command executed successfully.</source>
+        <target>La commande Status flow a été exécutée avec succès.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="e7b6d9bfc79b3e45967ced8eb5a6cca7">
+        <source>Error executing status flow command: %error%</source>
+        <target>Error executing status flow command: %error%</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="74ec153f73f06c7f6d77368cbcdeb1df">
+        <source>Status Flow Logs</source>
+        <target>Journaux de flux d’état</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="ff12c785ed5e47a7e1be511c2477f3bf">
+        <source>Log entry not found</source>
+        <target>Entrée de journal introuvable</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="5498a5f4896f117c2848f41304cec816">
+        <source>Log Details</source>
+        <target>Détails du journal</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="e3f2f6a54121ad9d19bb87dde82f5b45">
+        <source>Database logging is currently disabled. No logs to clean up.</source>
+        <target>La journalisation de la base de données est actuellement désactivée. Pas de bûches à nettoyer.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="098711e52e4686c7a9f41c8a93cbb7a3">
+        <source>Successfully deleted %count% old log entries</source>
+        <target>Successfully deleted %count% old log entries</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="d06122d385e59062a25237571e991306">
+        <source>Error when cleaning logs: %error%</source>
+        <target>Erreur lors du nettoyage des journaux : %error%</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="27406ce31efe902a0baba8ba676ba8f9">
+        <source>Error saving rule: %message%</source>
+        <target>Règle d’enregistrement des erreurs: %message%</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="02fd27d2951d00b83f111f63611ea863">
+        <source>Every hour</source>
+        <target>Toutes les heures</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="48bf14c419a1d441412510faf39c326d">
+        <source>Every day</source>
+        <target>Tous les jours</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="64863d871b7d8ecb1eb689ceb3595cb5">
+        <source>Every week</source>
+        <target>Chaque semaine</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="a3e8bd5cd6a466f361b5dcc22f307aa6">
+        <source>Error saving configuration: %message%</source>
+        <target>Erreur lors de l’enregistrement de la configuration: %message%</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="a0db49ba470c1c9ae2128c3470339153">
+        <source>Level</source>
+        <target>Level</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="677fc7835e7f805a8a48251a08740e89">
+        <source>Object Type</source>
+        <target>Type d’objet</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="d95fc016a6eee828f434ed5f55504427">
+        <source>Object ID</source>
+        <target>ID de l’objet</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="4c2a8fe7eaf24721cc7a9f0175115bd4">
+        <source>Message</source>
+        <target>Message</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="2e6a0867c3394acb0c3fa025a1517ddf">
+        <source>Rule ID</source>
+        <target>ID de règle</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="4059b0251f66a18cb56f544728796875">
+        <source>Info</source>
+        <target>Info</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="0eaadb4fcb48a0a0ed7bc9868be9fbaa">
+        <source>Warning</source>
+        <target>Avertissement</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="902b0d55fddef6f8d651fe1035b7d4bd">
+        <source>Error</source>
+        <target>Erreur</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="ab7a485ebe75b6dd7243ad719f23c7de">
+        <source>Rule</source>
+        <target>Règle</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="8cfd4915b5ecf1d4b3c2673f5001d94c">
+        <source>From Status</source>
+        <target>De Statut</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="25ac6a117707c359be77ac56891526ea">
+        <source>To Status</source>
+        <target>Vers le statut</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="d9a6430c42299a3e6144c1a3b2db92f2">
+        <source>Delay (hours)</source>
+        <target>Retard (heures)</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="7bb788a70fe531eae8d69994fde38630">
+        <source>Auto-execute</source>
+        <target>Exécution automatique</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="f628683f26ddbb86cc0bf13898e85d49">
+        <source>Run Now</source>
+        <target>Lancer maintenant</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="05f12579420dc319150585fa80b9c6a0">
+        <source>Run All Rules</source>
+        <target>Lancer Toutes les règles</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="2a0c351af79e58bf535386c04f8cd927">
+        <source>Advanced Order Status Management</source>
+        <target>Gestion avancée de l’état des commandes</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="2c49aad1aed3cbde57e2c7aea653033f">
+        <source>Manage order statuses and automate status transitions with rules and cron jobs</source>
+        <target>Gérez les statuts des commandes et automatisez les transitions de statut avec des règles et des tâches cron</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="62894a71502065c397f9f7afd759ebec">
+        <source>Are you sure that you want to uninstall? This will remove all transition rules and logs.</source>
+        <target>Êtes-vous sûr de vouloir désinstaller ? Cela supprimera toutes les règles de transition et les journaux.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="cbbc677ab8da155dfc5d3a87ec179b9c">
+        <source>Add New Status</source>
+        <target>Ajouter un nouveau statut</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="3bcc67d68bdef48a3bc5766693afbd49">
+        <source>Edit Status</source>
+        <target>Modifier le statut</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="01d6ab95d5e00ceb130682379a5dd6f7">
+        <source>Rules define how orders should automatically move between different statuses.</source>
+        <target>Les règles définissent la manière dont les commandes doivent passer automatiquement d’un statut à l’autre.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="d48cda776133957c59c77ea0eb1b0f3f">
+        <source>Each rule defines a transition from one status to another, after an optional delay.</source>
+        <target>Chaque règle définit un passage d’un statut à un autre, après un délai facultatif.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="0230097a1818f592b30ce1d3b15e4233">
+        <source>Rules can be executed manually or automatically via a scheduled task.</source>
+        <target>Les règles peuvent être exécutées manuellement ou automatiquement via une tâche planifiée.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="d06776cca8b7847eed9d57673d3814de">
+        <source>Manual Execution</source>
+        <target>Exécution manuelle</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="d5f3903a9fc9d8d2dab9be22fb1a3e8d">
+        <source>You can manually trigger the status flow processor to execute all active rules.</source>
+        <target>Vous pouvez déclencher manuellement le processeur de flux d’état pour exécuter toutes les règles actives.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="46d11ea3e574bd4b0acacda3c46bf527">
+        <source>Dry run (simulate without making changes)</source>
+        <target>Essai (simuler sans apporter de modifications)</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="1fde170ce8b93f863f8663fd33a3dcb0">
+        <source>Run Status Flow Processor</source>
+        <target>Processeur de flux d’état d’exécution</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="f924c01a4bdc5a695503a2c519d9e077">
+        <source>Cron Job Setup</source>
+        <target>Configuration de la tâche Cron</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="f8ae5ecb04c4f450065a7ab0c271274c">
+        <source>To automate status transitions, add the following command to your server cron jobs:</source>
+        <target>Pour automatiser les transitions de statut, ajoutez la commande suivante à vos tâches cron de serveur :</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="a0e688a1d803e0f33015f903f5dd5f10">
+        <source>Recommended cron frequency based on your configuration:</source>
+        <target>Fréquence cron recommandée en fonction de votre configuration :</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="120330fe13487e61821398c851220adb">
+        <source>If set to "hourly": </source>
+        <target>Si défini sur « hourly » :</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="a7c5471b10a74b509caff45bfe5afab0">
+        <source>If set to "daily": </source>
+        <target>Si défini sur « quotidien » :</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="3ce4bb9ab5cf7dd2c942dc13a8bd71ab">
+        <source>If set to "weekly": </source>
+        <target>Si défini sur « hebdomadaire » :</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="f95b1aa2b99629919453c7133f5466b9">
+        <source>Database logging is currently disabled. You can enable it in the configuration.</source>
+        <target>La journalisation de la base de données est actuellement désactivée. Vous pouvez l’activer dans la configuration.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="6d700736d73dbaf439d6dfa021a0b5a5">
+        <source>Log Maintenance</source>
+        <target>Entretien des journaux</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="e2577a5f4554555e461c68e96e095677">
+        <source>Logs are automatically cleaned up after %days% days. You can change this setting in the configuration.</source>
+        <target>Logs are automatically cleaned up after %days% days. You can change this setting in the configuration.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="ef76b827a3f2b237c3cddea410264d77">
+        <source>Clean old logs now</source>
+        <target>Nettoyez les vieilles bûches maintenant</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="df149d973fefbe7f9ba02a4e416a5e97">
+        <source>Additional Data</source>
+        <target>Données supplémentaires</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="12d97e7a87922a58b6ec8414c504a042">
+        <source>Add new rule</source>
+        <target>Ajouter une nouvelle règle</target>
+        <note>Line: </note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

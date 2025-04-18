@@ -1,0 +1,112 @@
+# Configuration routes
+evo_statusflow_configuration:
+  path: /evo-statusflow/configuration
+  methods: [GET, POST]
+  defaults:
+    _controller: Evolutive\Module\EvoStatusFlow\Controller\Admin\ConfigurationController::indexAction
+    _legacy_controller: AdminEvoStatusFlowConfiguration
+
+evo_statusflow_run_command:
+  path: /evo-statusflow/run-command
+  methods: [GET, POST]
+  defaults:
+    _controller: Evolutive\Module\EvoStatusFlow\Controller\Admin\ConfigurationController::runFlowCommandAction
+    _legacy_controller: AdminEvoStatusFlowConfiguration
+
+# Rule routes
+evo_statusflow_rule_index:
+  path: /evo-statusflow/rule
+  methods: [GET]
+  defaults:
+    _controller: Evolutive\Module\EvoStatusFlow\Controller\Admin\RuleController::indexAction
+    _legacy_controller: AdminEvoStatusFlowRules
+
+evo_statusflow_rule_create:
+  path: /evo-statusflow/rule/new
+  methods: [GET, POST]
+  defaults:
+    _controller: Evolutive\Module\EvoStatusFlow\Controller\Admin\RuleController::createAction
+    _legacy_controller: AdminEvoStatusFlowRules
+
+evo_statusflow_rule_edit:
+  path: /evo-statusflow/rule/{ruleId}/edit
+  methods: [GET, POST]
+  defaults:
+    _controller: Evolutive\Module\EvoStatusFlow\Controller\Admin\RuleController::editAction
+    _legacy_controller: AdminEvoStatusFlowRules
+  requirements:
+    ruleId: \d+
+
+evo_statusflow_rule_delete:
+  path: /evo-statusflow/rule/{ruleId}/delete
+  methods: [GET, POST]
+  defaults:
+    _controller: Evolutive\Module\EvoStatusFlow\Controller\Admin\RuleController::deleteAction
+    _legacy_controller: AdminEvoStatusFlowRules
+  requirements:
+    ruleId: \d+
+
+evo_statusflow_rule_toggle_active:
+  path: /evo-statusflow/rule/{ruleId}/toggle-active
+  methods: [POST]
+  defaults:
+    _controller: Evolutive\Module\EvoStatusFlow\Controller\Admin\RuleController::toggleActiveAction
+    _legacy_controller: AdminEvoStatusFlowRules
+  requirements:
+    ruleId: \d+
+
+evo_statusflow_rule_toggle_auto_execute:
+  path: /evo-statusflow/rule/{ruleId}/toggle-auto-execute
+  methods: [POST]
+  defaults:
+    _controller: Evolutive\Module\EvoStatusFlow\Controller\Admin\RuleController::toggleAutoExecuteAction
+    _legacy_controller: AdminEvoStatusFlowRules
+  requirements:
+    ruleId: \d+
+
+# Log routes
+evo_statusflow_log_index:
+  path: /evo-statusflow/log
+  methods: [GET]
+  defaults:
+    _controller: Evolutive\Module\EvoStatusFlow\Controller\Admin\LogController::indexAction
+    _legacy_controller: AdminEvoStatusFlowLogs
+
+evo_statusflow_log_view:
+  path: /evo-statusflow/log/{logId}/view
+  methods: [GET]
+  defaults:
+    _controller: Evolutive\Module\EvoStatusFlow\Controller\Admin\LogController::viewAction
+    _legacy_controller: AdminEvoStatusFlowLogs
+  requirements:
+    logId: \d+
+
+evo_statusflow_log_clean:
+  path: /evo-statusflow/log/clean
+  methods: [GET, POST]
+  defaults:
+    _controller: Evolutive\Module\EvoStatusFlow\Controller\Admin\LogController::cleanAction
+    _legacy_controller: AdminEvoStatusFlowLogs
+
+evo_statusflow_log_delete:
+  path: /evo-statusflow/log/{logId}/delete
+  methods: [GET, POST]
+  defaults:
+    _controller: Evolutive\Module\EvoStatusFlow\Controller\Admin\LogController::deleteAction
+    _legacy_controller: AdminEvoStatusFlowLogs
+  requirements:
+    logId: \d+
+
+evo_statusflow_log_delete_all:
+  path: /evo-statusflow/log/delete-all
+  methods: [GET, POST]
+  defaults:
+    _controller: Evolutive\Module\EvoStatusFlow\Controller\Admin\LogController::deleteAllAction
+    _legacy_controller: AdminEvoStatusFlowLogs
+
+evo_statusflow_log_bulk_delete:
+  path: /evo-statusflow/log/bulk-delete
+  methods: [POST]
+  defaults:
+    _controller: Evolutive\Module\EvoStatusFlow\Controller\Admin\LogController::bulkDeleteAction
+    _legacy_controller: AdminEvoStatusFlowLogs

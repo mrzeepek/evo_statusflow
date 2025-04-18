@@ -1,0 +1,301 @@
+services:
+  _defaults:
+    public: false
+    autowire: true
+    autoconfigure: true
+
+  # Commands (Symfony Commands - Now using CommandBus)
+  evolutive.evo_statusflow.command.process_status_flow:
+    class: Evolutive\Module\EvoStatusFlow\Command\ProcessStatusFlowCommand
+    arguments:
+      - '@prestashop.core.command_bus'
+      - '@logger'
+    tags:
+      - { name: 'console.command' }
+
+  evolutive.evo_statusflow.command.clean_logs:
+    class: Evolutive\Module\EvoStatusFlow\Command\CleanLogsCommand
+    arguments:
+      - '@evolutive.evo_statusflow.service.logging_service'
+    tags:
+      - { name: 'console.command' }
+
+  # Repositories (used by CQRS handlers)
+  evolutive.evo_statusflow.repository.rule_repository:
+    class: Evolutive\Module\EvoStatusFlow\Repository\RuleRepository
+    arguments:
+      - '@doctrine.dbal.default_connection'
+      - '%database_prefix%'
+    public: true
+
+  evolutive.evo_statusflow.repository.log_repository:
+    class: Evolutive\Module\EvoStatusFlow\Repository\LogRepository
+    arguments:
+      - '@doctrine.dbal.default_connection'
+      - '%database_prefix%'
+    public: true
+
+  evolutive.evo_statusflow.repository.history_repository:
+    class: Evolutive\Module\EvoStatusFlow\Repository\HistoryRepository
+    arguments:
+      - '@evolutive.evo_statusflow.repository.log_repository'
+
+  # Services (still used by CQRS handlers)
+  evolutive.evo_statusflow.service.status_flow_processor:
+    class: Evolutive\Module\EvoStatusFlow\Service\StatusFlowProcessor
+    arguments:
+      - '@evolutive.evo_statusflow.repository.rule_repository'
+      - '@evolutive.evo_statusflow.repository.history_repository'
+      - '@evolutive.evo_statusflow.service.logging_service'
+      - '@logger'
+      - '@doctrine.dbal.default_connection'
+      - '%database_prefix%'
+
+  evolutive.evo_statusflow.runner.command_runner:
+    class: Evolutive\Module\EvoStatusFlow\Runner\CommandRunner
+    arguments:
+      - '@kernel'
+      - '@prestashop.core.command_bus'
+    public: true
+
+  evolutive.evo_statusflow.service.logging_service:
+    class: Evolutive\Module\EvoStatusFlow\Service\LoggingService
+    arguments:
+      - '@evolutive.evo_statusflow.repository.log_repository'
+      - '@logger'
+    public: true
+
+  # Grid services for Rules
+  evolutive.evo_statusflow.grid.definition.factory.rule:
+    class: Evolutive\Module\EvoStatusFlow\Grid\Definition\Factory\RuleGridDefinitionFactory
+    parent: prestashop.core.grid.definition.factory.abstract_grid_definition
+    public: true
+    arguments:
+      - '@prestashop.core.hook.dispatcher'
+      - '@translator'
+    autowire: false
+    autoconfigure: false
+
+  evolutive.evo_statusflow.grid.query_builder.rule:
+    class: Evolutive\Module\EvoStatusFlow\Grid\Query\RuleQueryBuilder
+    arguments:
+      - '@doctrine.dbal.default_connection'
+      - '%database_prefix%'
+
+  evolutive.evo_statusflow.grid.factory.rule:
+    class: PrestaShop\PrestaShop\Core\Grid\GridFactory
+    arguments:
+      - '@evolutive.evo_statusflow.grid.definition.factory.rule'
+      - '@evolutive.evo_statusflow.grid.data_provider.rule'
+      - '@prestashop.core.grid.filter.form_factory'
+      - '@prestashop.core.hook.dispatcher'
+    public: true
+
+  evolutive.evo_statusflow.grid.data_provider.rule:
+    class: PrestaShop\PrestaShop\Core\Grid\Data\Factory\DoctrineGridDataFactory
+    arguments:
+      - '@evolutive.evo_statusflow.grid.query_builder.rule'
+      - '@prestashop.core.hook.dispatcher'
+      - '@prestashop.core.grid.query.doctrine_query_parser'
+      - 'rule'
+
+  # Grid services for Logs
+  evolutive.evo_statusflow.grid.definition.factory.log:
+    class: Evolutive\Module\EvoStatusFlow\Grid\Definition\Factory\LogGridDefinitionFactory
+    parent: prestashop.core.grid.definition.factory.abstract_grid_definition
+    public: true
+    arguments:
+      $hookDispatcher: '@prestashop.core.hook.dispatcher'
+      $translator: '@translator'
+    autowire: false
+    autoconfigure: false
+
+  evolutive.evo_statusflow.grid.query_builder.log:
+    class: Evolutive\Module\EvoStatusFlow\Grid\Query\LogQueryBuilder
+    arguments:
+      - '@doctrine.dbal.default_connection'
+      - '%database_prefix%'
+
+  evolutive.evo_statusflow.grid.factory.log:
+    class: PrestaShop\PrestaShop\Core\Grid\GridFactory
+    arguments:
+      - '@evolutive.evo_statusflow.grid.definition.factory.log'
+      - '@evolutive.evo_statusflow.grid.data_provider.log'
+      - '@prestashop.core.grid.filter.form_factory'
+      - '@prestashop.core.hook.dispatcher'
+    public: true
+
+  evolutive.evo_statusflow.grid.data_provider.log:
+    class: PrestaShop\PrestaShop\Core\Grid\Data\Factory\DoctrineGridDataFactory
+    arguments:
+      - '@evolutive.evo_statusflow.grid.query_builder.log'
+      - '@prestashop.core.hook.dispatcher'
+      - '@prestashop.core.grid.query.doctrine_query_parser'
+      - 'log'
+
+  # Forms (still used by controllers)
+  evolutive.evo_statusflow.form.rule_form_data_provider:
+    class: Evolutive\Module\EvoStatusFlow\Form\RuleFormDataProvider
+    arguments:
+      - '@evolutive.evo_statusflow.repository.rule_repository'
+    public: true
+
+  evolutive.evo_statusflow.form.rule_form_handler:
+    class: Evolutive\Module\EvoStatusFlow\Form\RuleFormHandler
+    arguments:
+      - '@form.factory'
+      - '@evolutive.evo_statusflow.form.rule_form_data_provider'
+      - '@translator'
+    public: true
+
+  evolutive.evo_statusflow.form.configuration_form_data_provider:
+    class: Evolutive\Module\EvoStatusFlow\Form\ConfigurationFormDataProvider
+    public: true
+
+  evolutive.evo_statusflow.form.configuration_form_handler:
+    class: Evolutive\Module\EvoStatusFlow\Form\ConfigurationFormHandler
+    arguments:
+      - '@form.factory'
+      - '@evolutive.evo_statusflow.form.configuration_form_data_provider'
+      - '@translator'
+    public: true
+
+  # Controllers (refactored for CQRS)
+  # ConfigurationController not yet refactored
+  Evolutive\Module\EvoStatusFlow\Controller\Admin\ConfigurationController:
+    class: Evolutive\Module\EvoStatusFlow\Controller\Admin\ConfigurationController
+    public: true
+    parent: PrestaShopBundle\Controller\Admin\FrameworkBundleAdminController
+    autowire: true
+    autoconfigure: false
+    arguments:
+      $configurationFormHandler: '@evolutive.evo_statusflow.form.configuration_form_handler'
+      $commandRunner: '@evolutive.evo_statusflow.runner.command_runner'
+      $translator: '@translator'
+
+  # RuleController refactored to use CQRS
+  Evolutive\Module\EvoStatusFlow\Controller\Admin\RuleController:
+    class: Evolutive\Module\EvoStatusFlow\Controller\Admin\RuleController
+    public: true
+    parent: PrestaShopBundle\Controller\Admin\FrameworkBundleAdminController
+    autowire: true
+    autoconfigure: false
+    arguments:
+      $ruleGridFactory: '@evolutive.evo_statusflow.grid.factory.rule'
+      $ruleFormHandler: '@evolutive.evo_statusflow.form.rule_form_handler'
+      $commandBus: '@prestashop.core.command_bus'
+
+  # LogController not yet refactored for CQRS
+  Evolutive\Module\EvoStatusFlow\Controller\Admin\LogController:
+    class: Evolutive\Module\EvoStatusFlow\Controller\Admin\LogController
+    public: true
+    parent: PrestaShopBundle\Controller\Admin\FrameworkBundleAdminController
+    autowire: true
+    autoconfigure: false
+    arguments:
+      $logGridFactory: '@evolutive.evo_statusflow.grid.factory.log'
+      $loggingService: '@evolutive.evo_statusflow.service.logging_service'
+
+  # Controller aliases
+  evolutive.evo_statusflow.controller.admin.log:
+    alias: Evolutive\Module\EvoStatusFlow\Controller\Admin\LogController
+    public: true
+
+  evolutive.evo_statusflow.controller.admin.configuration:
+    alias: Evolutive\Module\EvoStatusFlow\Controller\Admin\ConfigurationController
+    public: true
+
+  evolutive.evo_statusflow.controller.admin.rule:
+    alias: Evolutive\Module\EvoStatusFlow\Controller\Admin\RuleController
+    public: true
+
+  # CQRS Command Handlers
+  # Rule commands
+  evolutive.evo_statusflow.cqrs.command.rule.handler.create_rule_command_handler:
+    class: Evolutive\Module\EvoStatusFlow\CQRS\Command\Rule\Handler\CreateRuleCommandHandler
+    arguments:
+      - '@evolutive.evo_statusflow.repository.rule_repository'
+    tags:
+      - { name: 'tactician.handler', command: 'Evolutive\Module\EvoStatusFlow\CQRS\Command\Rule\CreateRuleCommand' }
+
+  evolutive.evo_statusflow.cqrs.command.rule.handler.update_rule_command_handler:
+    class: Evolutive\Module\EvoStatusFlow\CQRS\Command\Rule\Handler\UpdateRuleCommandHandler
+    arguments:
+      - '@evolutive.evo_statusflow.repository.rule_repository'
+    tags:
+      - { name: 'tactician.handler', command: 'Evolutive\Module\EvoStatusFlow\CQRS\Command\Rule\UpdateRuleCommand' }
+
+  evolutive.evo_statusflow.cqrs.command.rule.handler.delete_rule_command_handler:
+    class: Evolutive\Module\EvoStatusFlow\CQRS\Command\Rule\Handler\DeleteRuleCommandHandler
+    arguments:
+      - '@evolutive.evo_statusflow.repository.rule_repository'
+    tags:
+      - { name: 'tactician.handler', command: 'Evolutive\Module\EvoStatusFlow\CQRS\Command\Rule\DeleteRuleCommand' }
+
+  evolutive.evo_statusflow.cqrs.command.rule.handler.toggle_rule_active_command_handler:
+    class: Evolutive\Module\EvoStatusFlow\CQRS\Command\Rule\Handler\ToggleRuleActiveCommandHandler
+    arguments:
+      - '@evolutive.evo_statusflow.repository.rule_repository'
+    tags:
+      - { name: 'tactician.handler', command: 'Evolutive\Module\EvoStatusFlow\CQRS\Command\Rule\ToggleRuleActiveCommand' }
+
+  evolutive.evo_statusflow.cqrs.command.rule.handler.toggle_rule_auto_execute_command_handler:
+    class: Evolutive\Module\EvoStatusFlow\CQRS\Command\Rule\Handler\ToggleRuleAutoExecuteCommandHandler
+    arguments:
+      - '@evolutive.evo_statusflow.repository.rule_repository'
+    tags:
+      - { name: 'tactician.handler', command: 'Evolutive\Module\EvoStatusFlow\CQRS\Command\Rule\ToggleRuleAutoExecuteCommand' }
+
+  # Status Flow commands
+  evolutive.evo_statusflow.cqrs.command.status_flow.handler.process_rules_command_handler:
+    class: Evolutive\Module\EvoStatusFlow\CQRS\Command\StatusFlow\Handler\ProcessRulesCommandHandler
+    arguments:
+      - '@evolutive.evo_statusflow.service.status_flow_processor'
+    tags:
+      - { name: 'tactician.handler', command: 'Evolutive\Module\EvoStatusFlow\CQRS\Command\StatusFlow\ProcessRulesCommand' }
+
+  # Log commands
+  evolutive.evo_statusflow.cqrs.command.log.handler.clean_logs_command_handler:
+    class: Evolutive\Module\EvoStatusFlow\CQRS\Command\Log\Handler\CleanLogsCommandHandler
+    arguments:
+      - '@evolutive.evo_statusflow.service.logging_service'
+    tags:
+      - { name: 'tactician.handler', command: 'Evolutive\Module\EvoStatusFlow\CQRS\Command\Log\CleanLogsCommand' }
+
+  # CQRS Query Handlers
+  # Rule queries
+  evolutive.evo_statusflow.cqrs.query.rule.handler.get_rule_query_handler:
+    class: Evolutive\Module\EvoStatusFlow\CQRS\Query\Rule\Handler\GetRuleQueryHandler
+    arguments:
+      - '@evolutive.evo_statusflow.repository.rule_repository'
+    tags:
+      - { name: 'tactician.handler', command: 'Evolutive\Module\EvoStatusFlow\CQRS\Query\Rule\GetRuleQuery' }
+
+  evolutive.evo_statusflow.cqrs.query.rule.handler.get_active_rules_query_handler:
+    class: Evolutive\Module\EvoStatusFlow\CQRS\Query\Rule\Handler\GetActiveRulesQueryHandler
+    arguments:
+      - '@evolutive.evo_statusflow.repository.rule_repository'
+    tags:
+      - { name: 'tactician.handler', command: 'Evolutive\Module\EvoStatusFlow\CQRS\Query\Rule\GetActiveRulesQuery' }
+
+  evolutive.evo_statusflow.cqrs.query.rule.handler.get_auto_execute_rules_query_handler:
+    class: Evolutive\Module\EvoStatusFlow\CQRS\Query\Rule\Handler\GetAutoExecuteRulesQueryHandler
+    arguments:
+      - '@evolutive.evo_statusflow.repository.rule_repository'
+    tags:
+      - { name: 'tactician.handler', command: 'Evolutive\Module\EvoStatusFlow\CQRS\Query\Rule\GetAutoExecuteRulesQuery' }
+
+  # Log queries
+  evolutive.evo_statusflow.cqrs.query.log.handler.get_log_query_handler:
+    class: Evolutive\Module\EvoStatusFlow\CQRS\Query\Log\Handler\GetLogQueryHandler
+    arguments:
+      - '@evolutive.evo_statusflow.repository.log_repository'
+    tags:
+      - { name: 'tactician.handler', command: 'Evolutive\Module\EvoStatusFlow\CQRS\Query\Log\GetLogQuery' }
+
+  evolutive.evo_statusflow.cqrs.query.log.handler.get_logs_query_handler:
+    class: Evolutive\Module\EvoStatusFlow\CQRS\Query\Log\Handler\GetLogsQueryHandler
+    arguments:
+      - '@evolutive.evo_statusflow.repository.log_repository'
+    tags:
+      - { name: 'tactician.handler', command: 'Evolutive\Module\EvoStatusFlow\CQRS\Query\Log\GetLogsQuery' }
